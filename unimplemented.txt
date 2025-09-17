@@ -1,0 +1,223 @@
+
+- MeterValues
+- SendLocalList
+- ChangeConfiguration
+- ChangeAvailable
+- ClearCache
+- GetDiagnostics :
+- Reset :
+- UnlockConnector :
+- ReserveNow :
+- CancelReservation
+- GetConfiguration
+- TriggerMessage :
+- GetCompositeSchedule
+- SetChargingProfile :
+- ClearChargingProfile :
+
+* BootNotification
+* Heartbeat
+* Authorize
+* StartTransaction
+* StopTransaction
+* StatusNotification
+* DataTransfer
+
+
+
+  # Scenario: Client sends a valid MeterValues.req message
+  #   When I send a StartTransaction request with idTag "TEST1234" and connectorId 1
+  #   When The client sends a MeterValues.req with sampled values
+  #   Then The Central System should respond with MeterValues.conf
+
+
+  # Scenario: Client sends MeterValues.req without transactionId
+  #   When I send a StartTransaction request with idTag "TEST1234" and connectorId 1
+  #   When The client sends a MeterValues.req without transactionId
+  #   Then The Central System should reject the message as invalid
+
+  # Scenario: Central System sends a valid SendLocalList.req to the Charge Point
+  #   Given The Central System sends a SendLocalList.req message
+
+
+  # Scenario: Central System sends a ChangeConfiguration request
+  #   Given The Central System sends a ChangeConfiguration.req message with key "MeterValueSampleInterval" and value "30"
+
+
+When("The Central System sends a ChangeAvailable.req message", async function () {
+   await sendMessage("ChangeAvailability", {
+    connectorId: 1,
+    type: "Inoperative"
+  });
+})
+
+ChangeConfiguration-
+ReserveNow-
+
+
+// Given('The Central System sends a ChangeConfiguration.req message with key {string} and value {string}',
+//   async function (key, value) {
+//     lastResponse = await sendMessage("ReserveNow",
+//       {
+//         connectorId: 1,
+//         expiryDate: new Date(Date.now() + 3600 * 1000).toISOString(), // 1 hour from now
+//         idTag: "TEST1234", // must exist in backend
+//         reservationId: 1001
+//       })
+//   })
+
+// Given('The Central System sends a SendLocalList.req message', async function () {
+//   lastResponse = await sendMessage("SendLocalList",
+//     {
+//       listVersion: 1,
+//       updateType: "Full",
+//       localAuthorizationList: [
+//         { idTag: "TEST1234", idTagInfo: { status: "Accepted" } },
+//       ]
+//     })
+// })
+
+// Given("The client sends a MeterValues.req with sampled values", async function () {
+//   lastResponse = await sendMessage("MeterValues", {
+//     connectorId: 1,
+//     transactionId,
+//     meterValue: [
+//       {
+//         timestamp: new Date().toISOString(),
+//         sampledValue: [
+//           { value: "10.5", measurand: "Energy.Active.Import.Register", unit: "Wh" },
+//           { value: "220", measurand: "Voltage", unit: "V" },
+//         ]
+//       }
+//     ]
+//   })
+// })
+
+// Then('The Central System should respond with MeterValues.conf', function () {
+//   console.log("✅ MeterValues.conf received:", lastResponse);
+//   assert.deepStrictEqual(lastResponse[2], {})
+//   assert.equal(lastResponse[0], 3)
+// });
+
+// When("The client sends a MeterValues.req without transactionId", async function () {
+//   lastResponse = await sendMessage("MeterValues", {
+//     connectorId: 3,
+//     meterValue: [
+//       {
+//         timestamp: new Date().toISOString(),
+//         sampledValue: [
+//           { value: "15", measurand: "Power.Active.Import", unit: "W" }
+//         ]
+//       }
+//     ]
+//   })
+// })
+
+// Then('The Central System should reject the message as invalid', function () {
+//   assert.ok(lastResponse, "Central System must respond");
+//   console.log("❌ Invalid MeterValues response:", lastResponse);
+// });
+
+When("I send a ClearCache request", async function () {
+   await sendMessage("ClearCache", {});
+})
+
+Received:  [
+  4,
+  '1756808515665',
+  'NotImplemented',
+  "The action 'ClearCache' you are looking for is not found",
+  {}
+]
+
+When("I send a GetDiagnostics request", async function () {
+  ws.on("message", (msg) => {
+    const data = JSON.parse(msg.toString());
+    console.debug("[OCPP] ← Received:", data);
+  })
+  await sendMessage("GetDiagnostics", {
+    location:"ftp://server/diagnostics",
+    retries:3,
+    retryInterval: 30
+  });
+})
+
+
+When("I send a Reset request", async function () {
+  await sendMessage("Reset", { type: "Soft" });
+})
+
+When("I send a UnlockConnector request", async function () {
+  await sendMessage("UnlockConnector", { connectorId: 1 });
+})
+
+Received:  [
+  4,
+  '1756811993523',
+  'NotImplemented',
+  "The action 'UnlockConnector' you are looking for is not found",
+  {}
+]
+
+CancelReservation-  if ReserveNow is not work then how it wil work
+
+Given('I send a GetConfiguration.req request', async function () {
+  await sendMessage("GetConfiguration", {
+    key: "HeartbeatInterval"
+  });
+})
+
+Received:  [
+  4,
+  '1756813219998',
+  'NotImplemented',
+  "The action 'GetConfiguration' you are looking for is not found",
+  {}
+]
+
+Given('I send a TriggerMessage request', async function () {
+  await sendMessage("TriggerMessage", {
+    requestedMessage: "BootNotification"
+  });
+})
+
+Given('I send a GetCompositeSchedule request', async function () {
+  await sendMessage("GetCompositeSchedule", {
+    connectorId: 1,
+    duration: 1800, // 30 mins
+    chargingRateUnit: "A"
+  });
+})
+
+Given('I send a ClearChargingProfile request', async function () {
+  await sendMessage("ClearChargingProfile", {
+    id: 1,   // specific profileId
+    connectorId: 1,            // optional, can be 0 or 1 depending on scenario
+    chargingProfilePurpose: "TxProfile" // optional
+  });
+})
+
+
+Given('I send a SetChargingProfile request', async function () {
+  await sendMessage("SetChargingProfile", {
+    connectorId: 1,
+    csChargingProfiles: {
+      chargingProfileId: 1,
+      stackLevel: 0,
+      chargingProfilePurpose: "TxProfile",
+      chargingProfileKind: "Relative",
+      recurrencyKind: "Daily",
+      chargingSchedule: {
+        duration: 3600,
+        startSchedule: new Date().toISOString(),
+        chargingRateUnit: "A",
+        chargingSchedulePeriod: [
+          { startPeriod: 0, limit: 16.0 }
+        ]
+      }
+    }
+  }
+  );
+})
+
+

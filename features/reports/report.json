@@ -1,0 +1,328 @@
+[
+  {
+    "description": "",
+    "elements": [
+      {
+        "description": "",
+        "id": "ocpp-basic-workflow-of-charge-point(cp)-and-central-system(csms)-from-bootup-to-charging-cycle;bootnotification",
+        "keyword": "Scenario",
+        "line": 3,
+        "name": "BootNotification",
+        "steps": [
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 4,
+            "name": "CP sends a BootNotification request to CSMS to register the charger",
+            "match": {
+              "location": "features/stepDef/OCPP100.steps.js:87"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 48381976
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 5,
+            "name": "CP should receive a BootNotification from CSMS with confirmation status \"Accepted\"",
+            "match": {
+              "location": "features/stepDef/OCPP100.steps.js:94"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 3001722215
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 204402
+            }
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "ocpp-basic-workflow-of-charge-point(cp)-and-central-system(csms)-from-bootup-to-charging-cycle;heartbeat",
+        "keyword": "Scenario",
+        "line": 7,
+        "name": "Heartbeat",
+        "steps": [
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 8,
+            "name": "CP sends a Heartbeat request to CSMS",
+            "match": {
+              "location": "features/stepDef/OCPP100.steps.js:100"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 15674320
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 9,
+            "name": "CP should receive a Heartbeat acknowledgment with the current time from CSMS",
+            "match": {
+              "location": "features/stepDef/OCPP100.steps.js:104"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 3001398121
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 96826
+            }
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "ocpp-basic-workflow-of-charge-point(cp)-and-central-system(csms)-from-bootup-to-charging-cycle;authorize",
+        "keyword": "Scenario",
+        "line": 11,
+        "name": "Authorize",
+        "steps": [
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 12,
+            "name": "CP send an Authorize request with idTag \"TEST1234\" to CSMS",
+            "match": {
+              "location": "features/stepDef/OCPP100.steps.js:110"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 10357879
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 13,
+            "name": "CP should receive an Authorize and confirmation status as \"Accepted\" from CSMS",
+            "match": {
+              "location": "features/stepDef/OCPP100.steps.js:114"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 3001725145
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 110268
+            }
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "ocpp-basic-workflow-of-charge-point(cp)-and-central-system(csms)-from-bootup-to-charging-cycle;statusnotification",
+        "keyword": "Scenario",
+        "line": 15,
+        "name": "StatusNotification",
+        "steps": [
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 16,
+            "name": "CP send a StatusNotification request for connectorId 1 with status \"Available\" to CSMS",
+            "match": {
+              "location": "features/stepDef/OCPP100.steps.js:136"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 20619618
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 17,
+            "name": "CP should receive a StatusNotification confirmation from CSMS",
+            "match": {
+              "location": "features/stepDef/OCPP100.steps.js:147"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 3001485448
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 83536
+            }
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "ocpp-basic-workflow-of-charge-point(cp)-and-central-system(csms)-from-bootup-to-charging-cycle;starttransaction",
+        "keyword": "Scenario",
+        "line": 19,
+        "name": "StartTransaction",
+        "steps": [
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 20,
+            "name": "CP send a StartTransaction request with idTag \"TEST1234\" and connectorId 1 to CSMS",
+            "match": {
+              "location": "features/stepDef/OCPP100.steps.js:120"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 45314886
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 21,
+            "name": "CP should receive a StartTransaction confirmation with transactionId from CSMS",
+            "match": {
+              "location": "features/stepDef/OCPP100.steps.js:130"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 3001696453
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 73398
+            }
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "ocpp-basic-workflow-of-charge-point(cp)-and-central-system(csms)-from-bootup-to-charging-cycle;metervalues",
+        "keyword": "Scenario",
+        "line": 23,
+        "name": "MeterValues",
+        "steps": [
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 24,
+            "name": "CP send the MeterValues request for connector with transactionId to CSMS",
+            "match": {
+              "location": "features/stepDef/OCPP100.steps.js:153"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 25003266031
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 25,
+            "name": "CP should receive an acknowledgment from CSMS",
+            "match": {
+              "location": "features/stepDef/OCPP100.steps.js:176"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 3002847330
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 72728
+            }
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "ocpp-basic-workflow-of-charge-point(cp)-and-central-system(csms)-from-bootup-to-charging-cycle;stoptransaction",
+        "keyword": "Scenario",
+        "line": 27,
+        "name": "StopTransaction",
+        "steps": [
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 28,
+            "name": "CP send a StopTransaction request with idTag \"TEST1234\" for that transaction to CSMS",
+            "match": {
+              "location": "features/stepDef/OCPP100.steps.js:183"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 38813554
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 29,
+            "name": "CP should receive a StopTransaction confirmation from CSMS",
+            "match": {
+              "location": "features/stepDef/OCPP100.steps.js:193"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 3001078678
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 62760
+            }
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      }
+    ],
+    "id": "ocpp-basic-workflow-of-charge-point(cp)-and-central-system(csms)-from-bootup-to-charging-cycle",
+    "line": 1,
+    "keyword": "Feature",
+    "name": "OCPP basic workflow of charge point(CP) and central system(CSMS) from bootup to charging cycle",
+    "tags": [],
+    "uri": "features/chargingSession.feature"
+  }
+]
