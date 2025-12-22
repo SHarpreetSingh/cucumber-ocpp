@@ -13,17 +13,25 @@ Feature: OCPP basic workflow of charge point(CP) and central system(CSMS) from b
     Then CP should receive an Authorize and confirmation status as "Accepted" from CSMS
 
   Scenario: StatusNotification
-    When CP send a StatusNotification request for connectorId 1 with status "Available" to CSMS
+    When CP send a StatusNotification request for connectorId 2 with status "Preparing" to CSMS
     Then CP should receive a StatusNotification confirmation from CSMS
 
   Scenario: StartTransaction
-    When CP send a StartTransaction request with idTag "TEST1234" and connectorId 1 to CSMS
+    When CP send a StartTransaction request with idTag "TEST1234" and connectorId 2 to CSMS
     Then CP should receive a StartTransaction confirmation with transactionId from CSMS
 
+  Scenario: StatusNotification
+    When CP send a StatusNotification request for connectorId 2 with status "Charging" to CSMS
+    Then CP should receive a StatusNotification confirmation from CSMS
+
   Scenario: MeterValues
-    When CP send the MeterValues request for connector with transactionId to CSMS
+    When CP send the MeterValues request for connectorId 2 with transactionId to CSMS
     Then CP should receive an acknowledgment from CSMS
 
   Scenario: StopTransaction
     When CP send a StopTransaction request with idTag "TEST1234" for that transaction to CSMS
     Then CP should receive a StopTransaction confirmation from CSMS
+
+  Scenario: StatusNotification
+    When CP send a StatusNotification request for connectorId 2 with status "Available" to CSMS
+    Then CP should receive a StatusNotification confirmation from CSMS
