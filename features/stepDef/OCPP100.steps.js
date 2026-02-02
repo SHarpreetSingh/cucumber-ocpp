@@ -75,11 +75,15 @@ BeforeAll(async function () {
 
       console.log(`[CP] Sent RemoteStartTransaction.conf`);
 
-      // 2. We can store the transaction ID here if needed for follow-up steps
-      // This is where you'd set state for the next 'When' step:
-      // this.currentMsgId = msgId; 
+    } else if (msgType === 2 && action === "RemoteStopTransaction") {
+      console.log(`[CP] Received RemoteStopTransaction.req (ID: ${msgId}) - RESPONDING NOW`);
 
-    } else if (msgType === 2 && action === "GetDiagnostics") {
+      const confrmtn = [3, msgId, { status: "Accepted" }];
+      ws.send(JSON.stringify(confrmtn));
+
+      console.log(`[CP] Sent RemoteStopTransaction.conf`);
+    }
+    else if (msgType === 2 && action === "GetDiagnostics") {
       const confrmtn = [3, msgId, { "fileName": "CP42-Logs-20251208.zip" }];
       ws.send(JSON.stringify(confrmtn));
     }
@@ -234,7 +238,7 @@ Then("CP should receive a StopTransaction confirmation from CSMS", async functio
 });
 
 
-const CSMS_API_BASE_URL = "http://localhost:3000/adminApi"
+const CSMS_API_BASE_URL = "http://localhost:3000/adminApi/chargers"
 
 // -------------------- RemoteStartTransaction --------------------
 When('The CSMS sends a RemoteStartTransaction request for connectorId {int} to the CP with idTag {string}',
