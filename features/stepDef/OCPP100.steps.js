@@ -348,7 +348,7 @@ When('the CSMS sends a GetDiagnostics request with:', async function (dataTable)
   );
 
   console.log("data", data)
-  const url = `${CSMS_API_BASE_URL}/chargers/${chargepoint}`;
+  const url = `${CSMS_API_BASE_URL}/${chargepoint}`;
   const payload = {
     location: data.location,
     startTime: data.startTime,
@@ -391,7 +391,7 @@ When('the CSMS sends an UpdateFirmware request with:', async function (dataTable
   );
 
   console.log("data", data)
-  const url = `${CSMS_API_BASE_URL}/chargers/${chargepoint}`;
+  const url = `${CSMS_API_BASE_URL}/${chargepoint}`;
   try {
     const response = await axios.post(`${url}/update-firmware`, data);
     console.log("response", response.data)
