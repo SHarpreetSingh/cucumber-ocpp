@@ -1,24 +1,26 @@
 {
-  "name": "websocketcp",
+  "name": "ocpp_code",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon getConfig.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "type": "commonjs",
   "dependencies": {
-    "@cucumber/cucumber": "^12.2.0",
     "ajv": "^8.17.1",
     "ajv-formats": "^3.0.1",
-    "cucumber-html-reporter": "^7.2.0",
+    "axios": "^1.12.2",
+    "nodemon": "^3.1.10",
     "ocpp-rpc": "^2.2.1",
     "ws": "^8.18.3"
   },
   "devDependencies": {
-    "@cucumber/pretty-formatter": "^2.2.0"
+    "@cucumber/cucumber": "^12.2.0",
+    "cucumber-html-reporter": "^7.2.0"
   }
 }
